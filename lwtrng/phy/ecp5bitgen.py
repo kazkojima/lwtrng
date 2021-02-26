@@ -33,8 +33,12 @@ class LwTrngPHYBitGen(Module):
 
         self.disable = disable = Signal()
         self.perturb = perturb = Signal(32)
-        self.out = out = Signal()
+        self.out = Signal()
+        outer_out = Signal()
         inner_out = Signal(4)
+
+        # Expect metastable bits on self.out
+        self.sync += self.out.eq(outer_out)
 
         ro_list = [ _PHYRingOscillator(disable, perturb[i]) for i in range(16) ]
         self.submodules.ro_list = ro_list
@@ -53,7 +57,7 @@ class LwTrngPHYBitGen(Module):
         self.specials += [
             Instance("TRELLIS_SLICE",
                      p_LUT0_INITVAL = 0xace1,
-                     o_F0 = out,
+                     o_F0 = outer_out,
                      i_A0 = inner_out[0],
                      i_B0 = inner_out[1],
                      i_C0 = inner_out[2],
