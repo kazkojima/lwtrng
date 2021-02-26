@@ -13,5 +13,8 @@ setup(
     license="BSD",
     python_requires="~=3.6",
     packages=find_packages(exclude=("test*", "sim*", "doc*", "examples*")),
-    include_package_data=False,
+    package_data={
+        'lwtrng': ['lwtrng/pp/verilog/**'],
+    },
+    include_package_data=True,
 )
