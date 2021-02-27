@@ -44,13 +44,9 @@ from lwtrng.rng import LwTrngGenerator32
 # TRNG -------------------------------------------------------------------------------------------
 
 class _TRNGSource(Module, AutoCSR):
-    def __init__(self):
+    def __init__(self, platform):
         self.submodules.phy = phy = LwTrngECP5PHYBitGen()
-        self.submodules.trng = trng = LwTrngGenerator32(phy)
-        self.data = CSRStatus(32)
-        self.comb += [
-            self.data.status.eq(trng.o)
-        ]
+        self.submodules.gen = LwTrngGenerator32(platform, phy)
 
 # CRG ----------------------------------------------------------------------------------------------
 
@@ -178,7 +174,7 @@ class BaseSoC(SoCCore):
             self.add_constant("REMOTEIP4", int(remote_ip[3]))
 
         # TRNG -------------------------------------------------------------------------------------
-        self.submodules.trng = _TRNGSource()
+        self.submodules.trng = _TRNGSource(platform)
         self.add_csr("trng")
 
         # Build --------------------------------------------------------------------------------------------
