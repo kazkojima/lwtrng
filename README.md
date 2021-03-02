@@ -6,7 +6,7 @@ Only a simple ECP5 version of the random bit generator PHY is given ATM, though 
 
 The current version of PHY is based on the phase jitter of 16 ring oscillators. The basic implementation is same with [David R. Piegdon's ringoscillator](https://github.com/dpiegdon/ringoscillator).
 
-The PHY output is post-processed with the 18-stage duplexing module which is a conditional component. Each stage does duplexing with the Keccak-f200 function. A 32-bit random number is made by collecting a few bits from these stage's outputs. This random words are fifo'ed and can be read by CPU as CSR.
+The PHY output is post-processed with the 18-stage duplexing([1],[2]) module which is a conditional component. Each stage does duplexing with the Keccak-f200([1]) function. A 32-bit random number is made by collecting a few bits from these stage's outputs. This random words are fifo'ed and can be read by CPU as CSR.
 
 ![Diagram of LwTrng](https://github.com/kazkojima/lwtrng/blob/main/doc/trng.png)
 
@@ -61,3 +61,12 @@ The resulted stream of random numbers are tested with dieharder and TestU01 with
  All tests were passed
 
 ```
+
+[> Links
+-------------
+
+[1] Team Keccak,
+[The Keccak-p permutations](https://keccak.team/keccakp.html)
+
+[2] Guido Bertoni, Joan Daemen, Michaël Peeters and Gilles Van Assche,
+[Duplexing the sponge: single-pass authenticated encryption and other applications](https://www.researchgate.net/publication/221274795_Duplexing_the_Sponge_Single-Pass_Authenticated_Encryption_and_Other_Applications)
