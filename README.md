@@ -2,7 +2,7 @@
 --------
 LwTrng provides a small footprint TRNG core. The current implementation generates ~10Mbits/sec random data with 60MHz sytem clock.
 
-Only a simple ECP5 version of the random bit generator PHY is given ATM, though it can be easily ported to the other FPGAs or more sophisticated PHY can be constructed on them.
+Only simple ECP5 and Gowin versions of the random bit generator PHY are given ATM, though it can be easily ported to the other FPGAs or more sophisticated PHY can be constructed on them.
 
 The current version of PHY is based on the phase jitter of 16 ring oscillators. The basic implementation is same with [David R. Piegdon's ringoscillator](https://github.com/dpiegdon/ringoscillator).
 
