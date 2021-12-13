@@ -166,26 +166,10 @@ class BaseSoC(SoCCore):
                 pads         = platform.request_all("user_led"),
                 sys_clk_freq = sys_clk_freq)
 
-        # Analyzer ---------------------------------------------------------------------------------
-        with_analyzer = False
-        if with_analyzer:
-            from litescope import LiteScopeAnalyzer
-            self.add_uartbone(name="uart_bridge")
-            self.submodules.analyzer = LiteScopeAnalyzer([
-                self.cpu.ibus.cmd.addr,
-                self.cpu.ibus.cmd.valid,
-                self.cpu.ibus.cmd.ready,
-                self.cpu.ibus.cmd.we,
-                self.cpu.ibus.rdata.valid,
-                self.cpu.ibus.rdata.ready,
-                self.cpu.ibus.rdata.data,
-            ], clock_domain = "sys", depth=512)
-            self.add_csr("analyzer")
-
-# TRNG -------------------------------------------------------------------------------------
+        # TRNG -------------------------------------------------------------------------------------
         self.submodules.trng = _TRNGSource(platform)
         self.add_csr("trng")
- 
+
 # Build --------------------------------------------------------------------------------------------
 
 def main():
@@ -225,6 +209,8 @@ def main():
         with_etherbone = args.with_etherbone,
         eth_ip         = args.eth_ip,
         eth_dynamic_ip = args.eth_dynamic_ip,
+        local_ip       = args.local_ip,
+        remote_ip      = args.remote_ip,
         with_spi_flash = args.with_spi_flash,
         **soc_core_argdict(args))
     if args.with_spi_sdcard:
