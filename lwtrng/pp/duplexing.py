@@ -1,7 +1,7 @@
-from nmigen import *
-from nmigen.cli import main
-from nmigen.sim import Simulator, Delay, Settle
-#from nmigen.test.tools import *
+from amaranth import *
+from amaranth.cli import main
+from amaranth.sim import Simulator, Delay, Settle
+#from amaranth.test.tools import *
 
 # Duplexing with Keccak-f200
 class Duplexing(Elaboratable):

@@ -20,7 +20,7 @@ Excluding the FIFO part, it consumes ~500 slices on ECP5.
 ------------------
 **TODO**
 
-The post process module is writen with nMigen and its verilog output is needed to use it from LiteX ATM. The command below will generate the verilog file. 
+The post process module is writen with Amaranth and its verilog output is needed to use it from LiteX ATM. The command below will generate the verilog file. 
 ```
 pushd lwtrng/pp/verilog
 make
@@ -28,7 +28,7 @@ popd
 ```
 To register LwTrng module to your python environment, run setup.py.
 ```
-./setup.py develope --user
+./setup.py develop --user
 ```
 
 
