@@ -23,14 +23,14 @@ class LwTrngGenerator32(Module, AutoCSR):
         self.submodules.fifo = fifo = stream.SyncFIFO([("data", 32)], 512)
 
         # CPU side
-        self.data = CSRStatus(32)
         self.ready = CSRStatus(1)
+        self.data = CSRStatus(32)
         self.comb += [
             fifo.source.ready.eq(self.data.we),
             self.data.status.eq(fifo.source.data),
             self.ready.status.eq(fifo.source.valid)
         ]
-        
+
         # RNG side
         z = Signal(32)
         z_valid = Signal()
